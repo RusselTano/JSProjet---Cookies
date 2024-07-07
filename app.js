@@ -1,29 +1,15 @@
-const inputName = document.getElementById("name");
-const inputValue = document.getElementById("value");
-const showButton = document.querySelector(".display-cookie-btn");
-const createButton = document.querySelector(".create-cookie-btn");
+const inputs = document.querySelectorAll("input");
 
-console.log(inputName, inputValue, showButton, createButton);
-let name;
-let value
-inputName.addEventListener("input", (e) => {
-
-  nom = e.target.value;
-
-});
-inputValue.addEventListener("input", (e) => {
-   value = e.target.value;
-
+inputs.forEach((input) => {
+  input.addEventListener("invalid", handleValidation);
+  input.addEventListener("input", handleValidation);
 });
 
-
-createButton.addEventListener("click", createCookie);
-
-function createCookie(){
-const cookie = document.createElement("div");
-cookie.className = "cookie";
-cookie.innerHTML = `
-      <p class="cookie__name"></p>
-      <p class="cookie__value"></p>
-`
+function handleValidation(e) {
+  if (e.type === "invalid") {
+    e.target.setCustomValidity("Ce champ ne peut etre vide.");
+  } else if (e.type === "input") {
+    e.target.setCustomValidity("");
+  }
 }
+
