@@ -13,3 +13,21 @@ function handleValidation(e) {
   }
 }
 
+const cookieForm = document.querySelector("form");
+cookieForm.addEventListener("submit", handleForm);
+
+function handleForm(e) {
+  e.preventDefault();
+
+  const newCookie = {};
+
+  inputs.forEach((input) => {
+    const nameAttribute = input.getAttribute("name");
+    newCookie[nameAttribute] = input.value;
+  });
+  console.log(newCookie);
+  newCookie.expires = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000);
+
+  createCookie(newCookie)
+}
+
