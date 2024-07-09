@@ -25,9 +25,14 @@ function handleForm(e) {
     const nameAttribute = input.getAttribute("name");
     newCookie[nameAttribute] = input.value;
   });
+  
   console.log(newCookie);
   newCookie.expires = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000);
 
   createCookie(newCookie)
 }
 
+function createCookie(newCookie) {
+
+  document.cookie = `${encodeURIComponent(newCookie.name)} = ${encodeURIComponent(newCookie.value)}; expires = ${newCookie.expires.toUTCString()}`
+}
